@@ -301,7 +301,7 @@ export default {
   methods: {
     ...mapActions("accounts", ["connectWeb3Modal"]),
 
-    asynct sweepTokens() {
+    async sweepTokens() {
       let component = this;
       component.loading = true;
       
