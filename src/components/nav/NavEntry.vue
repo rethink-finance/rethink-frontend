@@ -462,7 +462,7 @@ export default {
         component.prepNAVLiquidUpdate(
           component.entry.liquidUpdates
         ),//NAVLiquidUpdate[] liquid;
-	component.fund.safe,
+        component.fund.safe,
         component.getSelectedFundAddress,//fund
         0,//navEntryIndex
         component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],//isPastNAVUpdate
@@ -471,12 +471,12 @@ export default {
         component.entry.pastNAVUpdateEntryFundAddress//pastNAVUpdateEntryFundAddress
       ).call();
       component.loading = false;
-      let encodedDataliquidCalculationReadOnly = component.getWeb3.eth.abi.encodeFunctionCall(NAVCalculatorJSON.abi[9],
+      let encodedDataliquidCalculationReadOnly = component.getWeb3.eth.abi.encodeFunctionCall(NAVCalculatorJSON.abi[5],
       [
         component.prepNAVLiquidUpdate(
           component.entry.liquidUpdates
         ),
-	component.fund.safe,
+        component.fund.safe,
         component.getSelectedFundAddress,
         0,
         component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],
@@ -526,7 +526,7 @@ export default {
     },
     async simulateNft() {
       //TODO
-      //let encodedDataNftCalculationReadOnly = component.getWeb3.eth.abi.encodeFunctionCall(NAVCalculatorJSON.abi[11], []);
+      //let encodedDataNftCalculationReadOnly = component.getWeb3.eth.abi.encodeFunctionCall(NAVCalculatorJSON.abi[7], []);
     },
     async simulateComp() {
       let component = this;

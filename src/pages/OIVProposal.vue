@@ -80,10 +80,10 @@
       </div>
     </div>
 
-    <pre>
+    <pre style="color:#fff">
       description: {{ descriptionMetadata }} 
       proposalEntries: {{ proposalEntries  }}
-    </pre>
+    </pre style="color:#fff">
 
 
     <div class="mt-3">

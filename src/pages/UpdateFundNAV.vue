@@ -7,7 +7,7 @@
     <textarea v-model="navUpdate" class="form-control deposit-input" placeholder="Decode Nav Update"></textarea>
     <div class="pool-submit-buttons">
 
-      <pre>{{ navUpdateDecoded }}</pre>
+      <pre style="color:#fff">{{ navUpdateDecoded }}</pre>
 
 
       <button @click="decodeNavUpdate" class="btn btn-success">
@@ -36,14 +36,14 @@
 
     <h2>NAV Update Entries</h2>
 
-    <pre>
+    <pre style="color:#fff">
       navUpdateEntries: {{ navUpdateEntries }}
     </pre>
 
 
     <h2>Suggested NAV Permission</h2>
 
-    <pre>
+    <pre style="color:#fff">
       defaultNavEntryPermission: [{{ defaultNavEntryPermission }}]
     </pre>
 
