@@ -671,11 +671,42 @@ export default {
 
 
       //proposae nav update for fund (target: fund addr, payloadL bytes)
+      //GOV NAV
       await rethinkFundGovernorContract.methods.propose(
-        [component.getSelectedFundAddress, component.getSelectedFundAddress, component.getSelectedFundAddress, component.getSelectedFundAddress, navExecutorAddr].concat(roleModTargets),
-        [0,0,0,0,0].concat(roleModGas),
-        [encodedDataNavUpdateEntries, encodedCollectFlowFeesAbiJSON, encodedCollectManagerFeesAbiJSON, encodedCollectPerformanceFeesAbiJSON, encodedDataStoreNAVDataNavUpdateEntries].concat(encodedRoleModEntries),
+        [component.getSelectedFundAddress, component.getSelectedFundAddress, component.getSelectedFundAddress, component.getSelectedFundAddress],
+        [0,0,0,0],
+        [encodedDataNavUpdateEntries, encodedCollectFlowFeesAbiJSON, encodedCollectManagerFeesAbiJSON, encodedCollectPerformanceFeesAbiJSON],
         "NAV UPDATE: #" + String(navUpdateIndex)
+      ).send({
+        from: component.getActiveAccount,
+        maxPriorityFeePerGas: null,
+        maxFeePerGas: null
+      }).on('transactionHash', function(hash){
+        console.log("tx hash: " + hash);
+        component.$toast.info("The transaction has been submitted. Please wait for it to be confirmed.");
+      }).on('receipt', function(receipt){
+        console.log(receipt);
+        if (receipt.status) {
+          component.$toast.success("Register the proposal transactions was successfull. You can now vote on the proposal in the pool governance page.");
+          
+        } else {
+          component.$toast.error("The register proposal tx has failed. Please contact the Rethink Finance support.");
+        }
+        component.loading = false;
+
+      }).on('error', function(error){
+        console.log(error);
+        component.loading = false;
+        component.$toast.error("There has been an error. Please contact the Rethink Finance support.");
+      });
+
+      //proposae nav update for fund (target: fund addr, payloadL bytes)
+      //GOV NAV PERMISSIONS
+      await rethinkFundGovernorContract.methods.propose(
+        [navExecutorAddr].concat(roleModTargets),
+        [0].concat(roleModGas),
+        [encodedDataStoreNAVDataNavUpdateEntries].concat(encodedRoleModEntries),
+        "NAV UPDATE PERMISSIONS: #" + String(navUpdateIndex)
       ).send({
         from: component.getActiveAccount,
         maxPriorityFeePerGas: null,
