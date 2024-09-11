@@ -510,12 +510,12 @@ export default {
         component.entry.pastNAVUpdateEntryFundAddress//pastNAVUpdateEntryFundAddress
       ).call();
       component.loading = false;
-      let encodedDataIlliquidCalculationReadOnly = component.getWeb3.eth.abi.encodeFunctionCall(NAVCalculatorJSON.abi[7], 
+      let encodedDataIlliquidCalculationReadOnly = component.getWeb3.eth.abi.encodeFunctionCall(NAVCalculatorJSON.abi[3], 
       [
         component.prepNAVIlliquidUpdate(
           component.entry.illiquidUpdates
         ),
-	component.fund.safe,
+	      component.fund.safe,
         component.getSelectedFundAddress,
         0,
         component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],
@@ -523,6 +523,8 @@ export default {
         parseInt(component.entry.pastNAVUpdateEntryIndex),
         component.entry.pastNAVUpdateEntryFundAddress
       ]);
+      console.log("encodedDataIlliquidCalculationReadOnly:" + encodedDataIlliquidCalculationReadOnly)
+
     },
     async simulateNft() {
       //TODO
