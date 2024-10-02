@@ -3,7 +3,7 @@
 <div class="section-small">
 
   <div class="d-flex justify-content-between flex-wrap">
-    <h3>Nav Update Entry</h3>    
+    <h3>Nav Update Entry: {{ entry.description.positionName}}, {{ entry.description.valuationSource}}</h3>    
 
     <!-- Action button -->
     <div>
