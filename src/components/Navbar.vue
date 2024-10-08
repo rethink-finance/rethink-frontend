@@ -120,6 +120,7 @@
               <li><button @click="switchToFraxtal" class="dropdown-item">Fraxtal</button></li>
               <li><button @click="switchToEthereum" class="dropdown-item">Ethereum</button></li>
               <li><button @click="switchToArbitrumSepolia" class="dropdown-item">Arbitrum Sepolia</button></li>
+              <li><button @click="switchToBase" class="dropdown-item">Base</button></li>
             </ul>
           </div>
 
@@ -284,6 +285,14 @@ export default {
         method: 'wallet_switchEthereumChain', 
         params: [{ 
           chainId: '0x66eee'
+        }] 
+      });
+    },
+    switchToBase() {
+      window.ethereum.request({ 
+        method: 'wallet_switchEthereumChain', 
+        params: [{ 
+          chainId: '0x2105'
         }] 
       });
     }

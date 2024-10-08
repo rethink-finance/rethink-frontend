@@ -15,6 +15,7 @@
       <span @click="switchToArbitrumGoerli" class="network-switch-link">Arbitrum Goerli testnet</span>.
       <span @click="switchToEthereum" class="network-switch-link">Ethereum</span>.
       <span @click="switchToArbitrumSepolia" class="network-switch-link">Arbitrum Sepolia testnet</span>.
+      <span @click="switchToBase" class="network-switch-link">Base</span>.
     </div>
 
     <router-view />
@@ -135,6 +136,14 @@ export default {
         method: 'wallet_switchEthereumChain', 
         params: [{ 
           chainId: '0x66eee'
+        }] 
+      });
+    },
+    switchToBase() {
+      window.ethereum.request({ 
+        method: 'wallet_switchEthereumChain', 
+        params: [{ 
+          chainId: '0x2105'
         }] 
       });
     }
