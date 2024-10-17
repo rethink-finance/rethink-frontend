@@ -198,16 +198,9 @@ export default {
             "data": null,
             "internalType": "address",
             "name": "targetAddress"
-          },
-          {
-            "idx": 2,
-            "isArray": false,
-            "data": "1",
-            "internalType": "enum ExecutionOptions",
-            "name": "options"
           }
         ],
-        "valueMethodIdx": 0
+        "valueMethodIdx": 25
       }],
       navUpdateEntries: [],
       navUpdateEntriesRaw: null,
