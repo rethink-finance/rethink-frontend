@@ -200,7 +200,7 @@ export default {
             "name": "targetAddress"
           }
         ],
-        "valueMethodIdx": 25
+        "valueMethodIdx": 24
       }],
       navUpdateEntries: [],
       navUpdateEntriesRaw: null,
