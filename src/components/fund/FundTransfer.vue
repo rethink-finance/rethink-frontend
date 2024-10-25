@@ -154,7 +154,7 @@
           <input type="text" v-model="txData" class="form-control deposit-input" placeholder="0x0000000000000000000000000000000000000000" aria-describedby="depositText">
         </div>
         <div>
-          <input type="text" v-model="gasAmount" class="form-control deposit-input" placeholder="0.0" aria-describedby="depositText">
+          <input type="text" v-model="value" class="form-control deposit-input" placeholder="0.0" aria-describedby="depositText">
         </div>
 
         <div class="deposit-button form-button-mobile">
@@ -253,7 +253,7 @@ export default {
       depositValue: null,
       contractAddress: null,
       transferAddress: null,
-      gasAmount: null,
+      value: null,
       txData: null,
       loading: false,
 
@@ -271,7 +271,7 @@ export default {
         from: component.getActiveAccount,
         maxPriorityFeePerGas: null,
         maxFeePerGas: null,
-        gas: parseInt(component.gasAmount)
+        value: parseInt(component.value)
       }).on('transactionHash', function(hash){
         console.log("tx hash: " + hash);
         component.$toast.info("The transaction has been submitted. Please wait for it to be confirmed.");
