@@ -666,9 +666,9 @@ export default {
       //proposae nav update for fund (target: fund addr, payloadL bytes)
       //GOV NAV
       await rethinkFundGovernorContract.methods.propose(
-        [component.getSelectedFundAddress, component.getSelectedFundAddress, component.getSelectedFundAddress, component.getSelectedFundAddress],
-        [0,0,0,0],
-        [encodedDataNavUpdateEntries, encodedCollectFlowFeesAbiJSON, encodedCollectManagerFeesAbiJSON, encodedCollectPerformanceFeesAbiJSON],
+        [component.getSelectedFundAddress],//[component.getSelectedFundAddress, component.getSelectedFundAddress, component.getSelectedFundAddress, component.getSelectedFundAddress],
+        [0],//[0,0,0,0],
+        [encodedDataNavUpdateEntries],//[encodedDataNavUpdateEntries, encodedCollectFlowFeesAbiJSON, encodedCollectManagerFeesAbiJSON, encodedCollectPerformanceFeesAbiJSON],
         "NAV UPDATE: #" + String(navUpdateIndex)
       ).send({
         from: component.getActiveAccount,
