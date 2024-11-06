@@ -308,6 +308,53 @@ export default {
       });
     },
 
+    prepRoleModEntryInput(value) {
+      /*
+        - address validation
+        - bytes validation
+        - int validation
+        - enum valudation (int)
+      */
+      
+      let dtype = value.internalType;
+
+      if (value.isArray) {
+        let retDat = []
+        for (let i=0; i<value.data.length;i++) {
+          if (dtype.startsWith("address")) {
+            retDat.push(value.data[i]);
+          } else if (dtype.startsWith("bytes")) {
+            retDat.push(value.data[i]);
+          } else if (dtype.startsWith("int")) {
+            retDat.push(value.data[i]);
+          } else if (dtype.startsWith("uint")) {
+            retDat.push(value.data[i]);
+          } else if (dtype.startsWith("enum")) {
+            retDat.push(value.data[i]);
+          } else if (dtype.startsWith("bool")) {
+            retDat.push(this.BOOL_TYPE[value.data[i]]);
+          }
+        }
+
+        return retDat;
+        
+      } else {
+        if (dtype.startsWith("address")) {
+          return value.data;
+        } else if (dtype.startsWith("bytes")) {
+          return value.data;
+        } else if (dtype.startsWith("int")) {
+          return value.data;
+        } else if (dtype.startsWith("uint")) {
+          return value.data;
+        } else if (dtype.startsWith("enum")) {
+          return value.data;
+        } else if (dtype.startsWith("bool")) {
+          return this.BOOL_TYPE[value.data];
+        }
+      }
+    },
+
     async initCreateFund () {
       let component = this;
       component.loading = true;
