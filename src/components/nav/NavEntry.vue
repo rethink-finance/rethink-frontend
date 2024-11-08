@@ -463,7 +463,7 @@ export default {
           component.entry.liquidUpdates
         ),//NAVLiquidUpdate[] liquid;
         component.fund.safe,
-        component.getSelectedFundAddress,//fund
+        (component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress,//fund
         0,//navEntryIndex
         component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],//isPastNAVUpdate
         parseInt(component.entry.pastNAVUpdateIndex),//pastNAVUpdateIndex
@@ -477,7 +477,7 @@ export default {
           component.entry.liquidUpdates
         ),
         component.fund.safe,
-        component.getSelectedFundAddress,
+        (component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress,
         0,
         component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],
         parseInt(component.entry.pastNAVUpdateIndex),
@@ -502,7 +502,7 @@ export default {
           component.entry.illiquidUpdates
         ),//NAVLiquidUpdate[] liquid;
 	component.fund.safe,
-        component.getSelectedFundAddress,//fund
+        (component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress,//fund
         0,//navEntryIndex
         component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],//isPastNAVUpdate
         parseInt(component.entry.pastNAVUpdateIndex),//pastNAVUpdateIndex
@@ -516,7 +516,7 @@ export default {
           component.entry.illiquidUpdates
         ),
 	      component.fund.safe,
-        component.getSelectedFundAddress,
+        (component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress,
         0,
         component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],
         parseInt(component.entry.pastNAVUpdateIndex),
@@ -545,7 +545,7 @@ export default {
         component.prepNAVComposableUpdate(
           component.entry.composableUpdates
         ),//NAVLiquidUpdate[] liquid;
-        component.getSelectedFundAddress,//fund
+        (component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress,//fund
         0,//navEntryIndex
         component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],//isPastNAVUpdate
         parseInt(component.entry.pastNAVUpdateIndex),//pastNAVUpdateIndex
@@ -558,7 +558,7 @@ export default {
         component.prepNAVComposableUpdate(
           component.entry.composableUpdates
         ),
-        component.getSelectedFundAddress,
+        (component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress,
         0,
         component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],
         parseInt(component.entry.pastNAVUpdateIndex),

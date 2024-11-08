@@ -103,6 +103,10 @@
     <h1> Submit NAV Permissions </h1>
 
     <div class="pool-management-body-text-color" style="border: 2em;">
+
+      <input v-model="selectedFundAddress" class="form-control deposit-input" placeholder="OIV ADDR"></input>
+      <input v-model="navFund.safe" class="form-control deposit-input" placeholder="OIV CUSTORY ADDR"></input>
+
       <h3> Process Redemptions: {{ processWithdraw }} </h3>
       <div class="data-item">
         <button @click="toggleProcessWithdraw" class="btn btn-success">
@@ -120,7 +124,7 @@
         Load Saved NAV Update Draft
       </button>
 
-      <NavEntryList :entries="navUpdateEntries" :fund="fund" />
+      <NavEntryList :entries="navUpdateEntries" :fund="navFund" />
 
       <h2>NAV Update Entries</h2>
 
@@ -193,7 +197,7 @@ export default {
   computed: {
     ...mapGetters("accounts", ["getActiveAccount", "getChainName", "getWeb3", "isUserConnected"]),
     ...mapGetters("fundFactory", ["getFundFactoryContract"]),
-    ...mapGetters("fund", ["getSelectedFundAddress", "getFundAbi", "getFundContract"]),
+    ...mapGetters("fund", ["getFundAbi"]),
 
     detectedNavUpdateEntries() {
       let n = localStorage.getItem("navUpdateEntries");
@@ -219,6 +223,10 @@ export default {
   data() {
     return {
       loading: false,
+      navFund:{
+        safe: "0x0000000000000000000000000000000000000000",
+        selectedFundAddress: "0x0000000000000000000000000000000000000000"
+      },
       fund: {
         depositFee: null,
         withdrawFee: null,
@@ -753,17 +761,6 @@ export default {
       }    
     },
 
-    getFundData(){
-      console.log(this.getSelectedFundAddress);
-      for (var fidx in this.getFunds){
-        if (this.getFunds[fidx].fundAddress == this.getSelectedFundAddress) {
-          this.fund = this.getFunds[fidx];
-          console.log(this.getFunds[fidx]);
-          return this.getFunds[fidx];
-        }
-      }
-    },
-
   /*
     struct NavUpdateEntry {
       NavUpdateType entryType;
@@ -794,7 +791,7 @@ export default {
             positionName: "",
             valuationSource: ""
           },
-          pastNAVUpdateEntryFundAddress: this.getSelectedFundAddress
+          pastNAVUpdateEntryFundAddress: this.navFund.selectedFundAddress
         })
     },
 
@@ -947,9 +944,9 @@ export default {
 
       //target address is fund contract
       //TODO: need input field to replace component.getSelectedFundAddres and .fund.safe
-      component.defaultNavEntryPermission[0].value[1].data = component.getSelectedFundAddress;
+      component.defaultNavEntryPermission[0].value[1].data = component.navFund.selectedFundAddress;
       //again, need to set target addr for scope target
-      component.defaultNavEntryPermission[1].value[1].data = component.getSelectedFundAddress;
+      component.defaultNavEntryPermission[1].value[1].data = component.navFund.selectedFundAddress;
       //functionSig
       component.defaultNavEntryPermission[0].value[2].data = "0xa61f5814";
       
