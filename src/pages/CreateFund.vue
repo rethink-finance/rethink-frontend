@@ -104,7 +104,7 @@
 
     <div class="pool-management-body-text-color" style="border: 2em;">
 
-      <input v-model="selectedFundAddress" class="form-control deposit-input" placeholder="OIV ADDR"></input>
+      <input v-model="navFund.selectedFundAddress" class="form-control deposit-input" placeholder="OIV ADDR"></input>
       <input v-model="navFund.safe" class="form-control deposit-input" placeholder="OIV CUSTORY ADDR"></input>
 
       <h3> Process Redemptions: {{ processWithdraw }} </h3>
@@ -186,6 +186,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import addresses from "../contracts/addresses.json";
 import FundInput from '../components/fund/FundInput.vue';
 import NavEntryList from '../components/nav/NavEntryList.vue';
 import ZodiacRoles from '../contracts/zodiac/RolesFull.json';
@@ -195,7 +196,7 @@ export default {
   name: "CreateFund",
 
   computed: {
-    ...mapGetters("accounts", ["getActiveAccount", "getChainName", "getWeb3", "isUserConnected"]),
+    ...mapGetters("accounts", ["getActiveAccount", "getChainId", "getChainName", "getWeb3", "isUserConnected"]),
     ...mapGetters("fundFactory", ["getFundFactoryContract"]),
     ...mapGetters("fund", ["getFundAbi"]),
 
@@ -210,13 +211,29 @@ export default {
 
       return false;
     },
+
+    detectedProposalEntries() {
+      let p = localStorage.getItem("proposalEntries");
+
+      if (p === null){
+        return false;
+      }
+
+      if (p !== null) {
+        if (p.length > 0) {
+          return true;
+        } 
+      }
+
+      return false;
+    },
   },
 
   created() {
     if (!this.getWeb3 || !this.isUserConnected) {
       this.$router.push({ name: 'home'});
     }
-
+    this.$store.dispatch("fund/storeAbi");
     this.proposalRoleModMethods = ZodiacRoles.abi.filter((val) => (val["type"] == "function") ? true :  false);
   },
 
@@ -1018,23 +1035,9 @@ export default {
 
       let navExecutorAddr = addresses["NAVExecutorBeaconProxy"][parseInt(component.getChainId)];
 
-
-      //get role mod contract addr
-      const safeContract = new component.getWeb3.eth.Contract(
-        GnosisSafeL2JSON.abi,
-        component.fund.safe
-      );
-      console.log(component.fund.safe);
-      let addr1 = "0x0000000000000000000000000000000000000001";
-      let safeModules = await safeContract.methods.getModulesPaginated(addr1, 10).call();
-      let roleModAddr = safeModules[0][1];
-
-
       //encode permisions for nav update
 
       let encodedRoleModEntries = [];
-      let roleModTargets = [];
-      let roleModGas = [];
 
       //TODO: assumes validation already happens when inputing data
       for(let i=0; i<component.defaultNavEntryPermission.length; i++) {
@@ -1047,12 +1050,7 @@ export default {
           roleModFunctionABI, roleModFunctionData
         );
         encodedRoleModEntries.push(encodedRoleModFunction);
-        roleModTargets.push(roleModAddr);
-        roleModGas.push(0);
       }
-
-      console.log("roleModAddr");
-      console.log(roleModAddr);
 
       console.log("encodedRoleModEntries");
       console.log(encodedRoleModEntries);

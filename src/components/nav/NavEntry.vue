@@ -501,7 +501,7 @@ export default {
         component.prepNAVIlliquidUpdate(
           component.entry.illiquidUpdates
         ),//NAVLiquidUpdate[] liquid;
-	component.fund.safe,
+        component.fund.safe,
         (component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress,//fund
         0,//navEntryIndex
         component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],//isPastNAVUpdate
