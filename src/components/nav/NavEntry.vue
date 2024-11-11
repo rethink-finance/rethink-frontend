@@ -541,18 +541,10 @@ export default {
 
       //  function composableCalculationReadOnly(IGovernableFundStorage.NAVComposableUpdate[] calldata composable, address fund, uint256 navEntryIndex, bool isPastNAVUpdate, uint256 pastNAVUpdateIndex, uint256 pastNAVUpdateEntryIndex, address pastNAVUpdateEntryFundAddress) external view returns (int256) {
 
-      component.simulatedCompVal = await NAVCalculatorContract.methods.composableCalculationReadOnly(
-        component.prepNAVComposableUpdate(
-          component.entry.composableUpdates
-        ),//NAVLiquidUpdate[] liquid;
-        (component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress,//fund
-        0,//navEntryIndex
-        component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],//isPastNAVUpdate
-        parseInt(component.entry.pastNAVUpdateIndex),//pastNAVUpdateIndex
-        parseInt(component.entry.pastNAVUpdateEntryIndex),//pastNAVUpdateEntryIndex
-        component.entry.pastNAVUpdateEntryFundAddress//pastNAVUpdateEntryFundAddress
-      ).call();
-      component.loading = false;
+      console.log("addr");
+      console.log((component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress);
+
+      
       let encodedDataComposableCalculationReadOnly = component.getWeb3.eth.abi.encodeFunctionCall(NAVCalculatorJSON.abi[1], 
       [
         component.prepNAVComposableUpdate(
@@ -565,6 +557,25 @@ export default {
         parseInt(component.entry.pastNAVUpdateEntryIndex),
         component.entry.pastNAVUpdateEntryFundAddress
       ]);
+
+      console.log(NAVCalculatorJSON.abi[1]);
+      
+      console.log("encodedDataComposableCalculationReadOnly");
+
+      console.log(encodedDataComposableCalculationReadOnly);
+
+      component.simulatedCompVal = await NAVCalculatorContract.methods.composableCalculationReadOnly(
+        component.prepNAVComposableUpdate(
+          component.entry.composableUpdates
+        ),//NAVLiquidUpdate[] liquid;
+        (component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress,//fund
+        0,//navEntryIndex
+        component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],//isPastNAVUpdate
+        parseInt(component.entry.pastNAVUpdateIndex),//pastNAVUpdateIndex
+        parseInt(component.entry.pastNAVUpdateEntryIndex),//pastNAVUpdateEntryIndex
+        component.entry.pastNAVUpdateEntryFundAddress//pastNAVUpdateEntryFundAddress
+      ).call();
+      component.loading = false;
     },
 
   }

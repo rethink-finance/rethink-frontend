@@ -731,6 +731,8 @@ export default {
     },
 
     async finalizeCreateFund() {
+      let component = this;
+      component.loading = true;
       await component.getFundFactoryContract.methods.finalizeCreateFund().send({
           from: component.getActiveAccount,
           maxPriorityFeePerGas: null,
