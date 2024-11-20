@@ -559,22 +559,38 @@ export default {
       ]);
 
       console.log(NAVCalculatorJSON.abi[1]);
-      
+
       console.log("encodedDataComposableCalculationReadOnly");
 
       console.log(encodedDataComposableCalculationReadOnly);
 
-      component.simulatedCompVal = await NAVCalculatorContract.methods.composableCalculationReadOnly(
-        component.prepNAVComposableUpdate(
-          component.entry.composableUpdates
-        ),//NAVLiquidUpdate[] liquid;
-        (component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress,//fund
-        0,//navEntryIndex
-        component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],//isPastNAVUpdate
-        parseInt(component.entry.pastNAVUpdateIndex),//pastNAVUpdateIndex
-        parseInt(component.entry.pastNAVUpdateEntryIndex),//pastNAVUpdateEntryIndex
-        component.entry.pastNAVUpdateEntryFundAddress//pastNAVUpdateEntryFundAddress
-      ).call();
+      if (component.getSelectedFundAddress === 'N/A') {
+        component.simulatedCompVal = await NAVCalculatorContract.methods.composableCalculationNonInitReadOnly(
+          component.prepNAVComposableUpdate(
+            component.entry.composableUpdates
+          ),//NAVLiquidUpdate[] liquid;
+          (component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress,//fund
+          0,//navEntryIndex
+          component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],//isPastNAVUpdate
+          parseInt(component.entry.pastNAVUpdateIndex),//pastNAVUpdateIndex
+          parseInt(component.entry.pastNAVUpdateEntryIndex),//pastNAVUpdateEntryIndex
+          component.entry.pastNAVUpdateEntryFundAddress,//pastNAVUpdateEntryFundAddress
+          addresses["GovernableFundFactoryBeaconProxy"][parseInt(component.getChainId)],//gff
+          component.getActiveAccount//deployer, NOTE: assumess connected account is deployer
+        ).call();
+      } else {
+        component.simulatedCompVal = await NAVCalculatorContract.methods.composableCalculationReadOnly(
+          component.prepNAVComposableUpdate(
+            component.entry.composableUpdates
+          ),//NAVLiquidUpdate[] liquid;
+          (component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress,//fund
+          0,//navEntryIndex
+          component.PastNAVUpdateMap[component.entry.isPastNAVUpdate],//isPastNAVUpdate
+          parseInt(component.entry.pastNAVUpdateIndex),//pastNAVUpdateIndex
+          parseInt(component.entry.pastNAVUpdateEntryIndex),//pastNAVUpdateEntryIndex
+          component.entry.pastNAVUpdateEntryFundAddress//pastNAVUpdateEntryFundAddress
+        ).call();
+      }
       component.loading = false;
     },
 
