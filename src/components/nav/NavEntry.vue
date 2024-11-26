@@ -545,7 +545,7 @@ export default {
       console.log((component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress);
 
       
-      let encodedDataComposableCalculationReadOnly = component.getWeb3.eth.abi.encodeFunctionCall(NAVCalculatorJSON.abi[1], 
+      let encodedDataComposableCalculationReadOnly = component.getWeb3.eth.abi.encodeFunctionCall(NAVCalculatorJSON.abi[0], 
       [
         component.prepNAVComposableUpdate(
           component.entry.composableUpdates
