@@ -471,7 +471,7 @@ export default {
         component.entry.pastNAVUpdateEntryFundAddress//pastNAVUpdateEntryFundAddress
       ).call();
       component.loading = false;
-      let encodedDataliquidCalculationReadOnly = component.getWeb3.eth.abi.encodeFunctionCall(NAVCalculatorJSON.abi[5],
+      let encodedDataliquidCalculationReadOnly = component.getWeb3.eth.abi.encodeFunctionCall(NAVCalculatorJSON.abi[6],
       [
         component.prepNAVLiquidUpdate(
           component.entry.liquidUpdates
@@ -545,7 +545,7 @@ export default {
       console.log((component.getSelectedFundAddress === 'N/A') ? component.fund.selectedFundAddress : component.getSelectedFundAddress);
 
       
-      let encodedDataComposableCalculationReadOnly = component.getWeb3.eth.abi.encodeFunctionCall(NAVCalculatorJSON.abi[0], 
+      let encodedDataComposableCalculationReadOnly = component.getWeb3.eth.abi.encodeFunctionCall(NAVCalculatorJSON.abi[2], 
       [
         component.prepNAVComposableUpdate(
           component.entry.composableUpdates
